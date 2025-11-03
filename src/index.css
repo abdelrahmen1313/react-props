@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sail&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap');body {
+  /* Minimal, fresh NBA-inspired gradient: muted navy -> soft court beige with subtle motion */
+  background: linear-gradient(120deg, #f4f6fa 0%, #e7ebf3 35%, #e8e2d6 100%);
+  background-size: 200% 200%;
+  animation: BackgroundGradient 24s ease-in-out infinite;
+  box-sizing: content-box;
+  scroll-behavior: smooth;
+}
+
+/* Players layout container */
+.App {
+  padding: 16px;
+  margin-inline: 1rem;
+}
+
+/* Fixed top navbar wrapper */
+.app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040; /* above cards and typical content */
+  backdrop-filter: saturate(120%) blur(6px);
+  margin-bottom: 1rem;
+}
+.app-navbar__inner {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav-logo {
+  font-family: "Tourney", sans-serif;
+  line-height: 1.7;
+  font-weight: 400;
+  font-size: large;
+  word-spacing: 1em;
+  letter-spacing: 0.1rem;
+  font-style: normal;
+  font-optical-sizing: auto;
+  color: #001235!important;
+  text-shadow: #f4f6fa -1px 3px 2px;
+}
+
+/* Provide safe space below the navbar so content isn't hidden */
+:root {
+  --navbar-height: 64px;
+}
+
+body {
+  padding-top: var(--navbar-height);
+}
+
+@keyframes BackgroundGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  margin-block: 1rem;
+  animation: fade-in 800ms ease forwards;
+  animation-delay: 200ms;
+  opacity: 0;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive grid container in PlayersList */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.2rem;
+  width: 88vw;
+  margin: 0 auto; /* Centers the grid horizontally */
+}
+
+/* Card animations */
+.player-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  animation: cardIn 600ms cubic-bezier(0.21, 1, 0.21, 1) forwards;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.player-card:nth-child(1) {
+  animation-delay: 60ms;
+}
+.player-card:nth-child(2) {
+  animation-delay: 120ms;
+}
+.player-card:nth-child(3) {
+  animation-delay: 180ms;
+}
+.player-card:nth-child(4) {
+  animation-delay: 240ms;
+}
+.player-card:nth-child(5) {
+  animation-delay: 300ms;
+}
+.player-card:nth-child(6) {
+  animation-delay: 360ms;
+}
+.player-card:nth-child(7) {
+  animation-delay: 420ms;
+}
+.player-card:nth-child(8) {
+  animation-delay: 480ms;
+}
+
+@keyframes cardIn {
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.player-card::before {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px 200px at var(--mx, 50%) var(--my, 0%),
+    rgba(120, 130, 255, 0.18),
+    transparent 40%
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.player-card:hover::before {
+  opacity: 1;
+}
+
+.player-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+}
+
+.card-media-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.player-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.5s ease;
+}
+
+.player-card:hover .player-image {
+  transform: scale(1.08);
+}
+
+.player-name {
+  letter-spacing: 0.3px;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.player-card:hover .player-name {
+  color: #3e52ff;
+  text-shadow: 0 2px 12px rgba(120, 130, 255, 0.35);
+}
+
+.player-meta {
+  color: #333;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
